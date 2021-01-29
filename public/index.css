@@ -134,6 +134,7 @@ section#sizes select.sizes {
 
 section#toppings {
   margin-top: 40px;
+  max-width: 900px;
 }
 section#toppings .toppings {
   display: flex;
@@ -170,6 +171,23 @@ section#substitute .switch {
 /* Order styles */
 section#order {
   margin: 40px auto;
+  display: flex;
+  flex-flow: column nowrap;
+}
+section#order .qty,
+section#order .total {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 2rem;
+  display: flex;
+  margin: 20px auto;
+}
+section#order .qty > input {
+  margin-left: 10px;
+  width: 50px;
+}
+section#order .total > input {
+  margin-left: 10px;
+  width: 60px;
 }
 section#order textarea {
   width: 100%;
@@ -179,7 +197,16 @@ section#order textarea {
 }
 
 button[type=submit] {
-  width: 100px;
+  display: block;
+  background: #ffffff;
+  border: 10px solid #fd6001;
+  color: #fd6001;
+  margin: 50px auto;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 2rem;
 }
 
 /* eof Order styles */

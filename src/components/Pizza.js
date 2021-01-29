@@ -25,7 +25,8 @@ export default function Pizza() {
   };
   const [values, setValues] = useState(initialValues);
 
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault();
     // if form valid the clear input
     // if form valid send data and return
     // if form invalid then show errors
@@ -63,6 +64,11 @@ export default function Pizza() {
   };
 
   const chgInstructions = (e) => {
+    const { name, value } = e.target;
+    onChange(name, value);
+  };
+
+  const chgQty = (e) => {
     const { name, value } = e.target;
     onChange(name, value);
   };
@@ -221,15 +227,24 @@ export default function Pizza() {
           </label>
         </section>
         <section id="order">
-          returns a database record of name, size, toppings and special
-          instructions
-          <div className="order">
-            <label>
-              Qty
-              <input type="number" name="qty" step="1" defaultValue="1" />
-            </label>
-            <button type="submit">Order</button>
-            <input type="text" name="amount" value="$19.95" />
+          <div>
+            <div className="order">
+              <label className="qty">
+                Qty
+                <input
+                  type="number"
+                  name="qty"
+                  step="1"
+                  defaultValue="1"
+                  onChange={chgQty}
+                />
+              </label>
+              <label className="total">
+                Total
+                <input type="text" name="amount" value="$19.95" />
+              </label>
+            </div>
+            <button type="submit">Place your order</button>
           </div>
         </section>
       </form>

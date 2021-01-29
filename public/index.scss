@@ -2,6 +2,7 @@ $font-heading: "Luckiest Guy", cursive;
 $font-text: "Roboto", sans-serif;
 
 /* colors */
+$white: #ffffff;
 $pizza: #fd6001;
 $lambda: #eb3a45;
 $text: rgb(35, 6, 138);
@@ -154,6 +155,7 @@ section#sizes {
 
 section#toppings {
   margin-top: 40px;
+  max-width: 900px;
   .toppings {
     display: flex;
     flex-flow: row wrap;
@@ -203,6 +205,26 @@ section#substitute {
 /* Order styles */
 section#order {
   margin: 40px auto;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .qty,
+  .total {
+    font-family: $font-heading;
+    font-size: 2rem;
+    display: flex;
+    margin: 20px auto;
+  }
+
+  .qty > input {
+    margin-left: 10px;
+    width: 50px;
+  }
+
+  .total > input {
+    margin-left: 10px;
+    width: 60px;
+  }
 
   textarea {
     width: 100%;
@@ -213,7 +235,16 @@ section#order {
 }
 
 button[type="submit"] {
-  width: 100px;
+  display: block;
+  background: $white;
+  border: 10px solid $pizza;
+  color: $pizza;
+  margin: 50px auto;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  font-family: $font-heading;
+  font-size: 2rem;
 }
 
 /* eof Order styles */
