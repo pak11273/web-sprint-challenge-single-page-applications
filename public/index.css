@@ -1,6 +1,8 @@
 /* colors */
 /* global styles */
-* {
+*,
+:before,
+:after {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   color: #23068a;
@@ -10,7 +12,10 @@ html {
   font-size: 14px;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: "Luckiest Guy", cursive;
 }
 
@@ -19,22 +24,38 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 5rem;
+}
+
+h3 {
+  font-size: 4rem;
+}
+
+h4 {
+  font-size: 3rem;
 }
 
 .title {
   color: #fd6001;
-  font-size: 4rem;
+  font-size: 5rem;
 }
 .title span {
-  color: #EB3A45;
+  color: #eb3a45;
+}
+
+.subtitle {
+  font-size: 2rem;
+  text-align: center;
+}
+.subtitle span {
+  color: #eb3a45;
 }
 
 /* eof global styles */
 /* App styled */
 .container {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   align-items: center;
   height: 100vh;
   width: 100%;
@@ -52,7 +73,7 @@ h2 {
   position: relative;
 }
 .main-nav a:hover {
-  color: #EB3A45;
+  color: #eb3a45;
 }
 .main-nav a:hover::after {
   content: "";
@@ -61,7 +82,7 @@ h2 {
   height: 6px;
   left: 0;
   top: 1.8rem;
-  background-color: #EB3A45;
+  background-color: #eb3a45;
 }
 
 /* eof Nav styles */
@@ -70,10 +91,97 @@ h2 {
   margin-top: 100px;
   max-width: 960px;
 }
-.home h2 {
+.home h2,
+.home h4 {
   text-align: center;
 }
 
 /* eof Home styles */
+/* Pizza styles */
+.pizza {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+#form {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 80px 10px;
+}
+#form h4 {
+  text-align: center;
+}
+
+.required {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #eb3a45;
+}
+
+section#sizes {
+  border: 1px solid #23068a;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+section#sizes select.sizes {
+  display: block;
+  margin: 20px auto;
+  max-width: 200px;
+  font-size: 1rem;
+}
+
+section#toppings {
+  margin-top: 40px;
+}
+section#toppings .toppings {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+section#toppings .toppings label {
+  height: 40px;
+  max-width: 200px;
+  width: 100%;
+  margin: 10px auto;
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: flex-end;
+}
+section#toppings .toppings label:empty {
+  height: 0;
+  margin: 0 auto;
+  border: none;
+}
+/* eof Pizza styles */
+/* Substitute styles */
+section#substitute {
+  margin: 40px 0;
+}
+section#substitute .switch {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+/* eof Substitute styles */
+/* Order styles */
+section#order {
+  margin: 40px auto;
+}
+section#order textarea {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+}
+
+button[type=submit] {
+  width: 100px;
+}
+
+/* eof Order styles */
 
 /*# sourceMappingURL=index.css.map */

@@ -3,87 +3,217 @@ $font-text: "Roboto", sans-serif;
 
 /* colors */
 $pizza: #fd6001;
-$lambda: #EB3A45;
+$lambda: #eb3a45;
 $text: rgb(35, 6, 138);
-
 
 /* global styles */
 
- * {
-     font-family: $font-text;
-     box-sizing: border-box;
-     color: $text; 
- }
+*,
+:before,
+:after {
+  font-family: $font-text;
+  box-sizing: border-box;
+  color: $text;
+}
 
- html {
-     font-size: 14px;
- }
+html {
+  font-size: 14px;
+}
 
- h1, h2, h3, h4 {
-     font-family: $font-heading;
- }
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-heading;
+}
 
- h1 {
-     font-size: 6rem;  
- }
+h1 {
+  font-size: 6rem;
+}
 
- h2 {
-     font-size: 2rem;  
- }
+h2 {
+  font-size: 5rem;
+}
 
- .title {
-    color: $pizza;
-     font-size: 4rem;
-         span {
-             color: $lambda;
-         }
- }
+h3 {
+  font-size: 4rem;
+}
+
+h4 {
+  font-size: 3rem;
+}
+
+.title {
+  color: $pizza;
+  font-size: 5rem;
+
+  span {
+    color: $lambda;
+  }
+}
+
+.subtitle {
+  font-size: 2rem;
+  text-align: center;
+
+  span {
+    color: $lambda;
+  }
+}
 
 /* eof global styles */
 
 /* App styled */
 .container {
-    display: flex;
-    flex-flow:column wrap;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
+
 /* eof App styled */
 
 /* Nav styles */
 .main-nav {
-    font-size: 1.4rem;
-    margin-top: 15px;
-    a {
-        padding-right: 1.4rem;
-        text-decoration: none;
-        position: relative;
+  font-size: 1.4rem;
+  margin-top: 15px;
 
+  a {
+    padding-right: 1.4rem;
+    text-decoration: none;
+    position: relative;
 
-        &:hover {
-            color: $lambda;
-            &::after {
-                content: "";
-                position: absolute;
-                width: 80%;
-                height: 6px;
-                left: 0;
-                top: 1.8rem;
-                background-color: $lambda;
-            }
-        }
+    &:hover {
+      color: $lambda;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 6px;
+        left: 0;
+        top: 1.8rem;
+        background-color: $lambda;
+      }
     }
+  }
 }
+
 /* eof Nav styles */
 
- /* Home styles */ 
- .home {
-     margin-top: 100px;
-     max-width: 960px;
+/* Home styles */
+.home {
+  margin-top: 100px;
+  max-width: 960px;
 
-     h2 {
-         text-align: center;
-     }
- }
- /* eof Home styles */ 
+  h2,
+  h4 {
+    text-align: center;
+  }
+}
+
+/* eof Home styles */
+
+/* Pizza styles */
+.pizza {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+#form {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 80px 10px;
+
+  h4 {
+    text-align: center;
+  }
+}
+
+.required {
+  text-align: center;
+  font-size: 1.2rem;
+  color: $lambda;
+}
+
+section#sizes {
+  border: 1px solid $text;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 450px;
+  margin: 0 auto;
+
+  select.sizes {
+    display: block;
+    margin: 20px auto;
+    max-width: 200px;
+    font-size: 1rem;
+  }
+}
+
+section#toppings {
+  margin-top: 40px;
+  .toppings {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin-top: 20px;
+
+    label {
+      height: 40px;
+      max-width: 200px;
+      width: 100%;
+      margin: 10px auto;
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: flex-end;
+    }
+
+    label:empty {
+      height: 0;
+      margin: 0 auto;
+      border: none;
+    }
+
+    @media (min-width: 437px) {
+      label:empty {
+        // margin: 10px auto;
+      }
+    }
+  }
+}
+
+/* eof Pizza styles */
+
+/* Substitute styles */
+
+section#substitute {
+  margin: 40px 0;
+
+  .switch {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* eof Substitute styles */
+
+/* Order styles */
+section#order {
+  margin: 40px auto;
+
+  textarea {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+button[type="submit"] {
+  width: 100px;
+}
+
+/* eof Order styles */
