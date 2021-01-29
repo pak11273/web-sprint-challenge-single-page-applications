@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Swtich from "./Swtich";
 
 export default function Pizza() {
-  const initialState = {
+  const initialValues = {
     size: "",
     toppings: [],
     substitute: false,
@@ -11,7 +11,7 @@ export default function Pizza() {
     qty: 0,
     total: 0,
   };
-  const [state, setState] = useState(initialState);
+  const [values, setValues] = useState(initialValues);
 
   const submit = () => {
     // if form valid the clear input
@@ -21,10 +21,10 @@ export default function Pizza() {
   };
 
   const onChange = (e) => {
-    const [name, value] = e.target;
-    setState({
-      ...state,
-      size: value.innerHTML,
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
     });
   };
 
@@ -37,7 +37,12 @@ export default function Pizza() {
         <section id="sizes">
           <h4>Choose your size</h4>
           <p className="required">(required)</p>
-          <select className="sizes" onChange={onChange}>
+          <select
+            name="size"
+            className="sizes"
+            onChange={onChange}
+            value={values.size}
+          >
             <option value="" selected disabled hidden>
               -- select --
             </option>
