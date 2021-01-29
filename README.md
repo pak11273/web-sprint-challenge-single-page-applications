@@ -31,8 +31,11 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
 1. In 1-2 sentences, explain what React's `useRouteMatch` hook is used for.
+   useRouteMatch is a hook that fetches the current route. You can use it to dynamically set nested routes.
 1. How would you explain form validation to someone who has never programmed before?
+   Form validation is where we look at data and apply rules to that data. If the data doesn't fit our rules then we declare the form invalid. This process is good for keeping stored data in a format that you would like to keep it in.
 1. In 1-2 sentences, define end to end testing.
+   End to End testing is a way to test a web application from the beginning of the user interaction on a viewing device(ie browser) to the end of the interaction which could be data received from the backend. E2E testing includes simulated events created by a user and then checking the outcomes to see if they produce the results we expect.
 
 ## Instructions
 
@@ -49,14 +52,14 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 Your finished project must include all of the following requirements:
 
-- [ ] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
-- [ ] A form with a "/pizza" route
-- [ ] A name text input field
-- [ ] Validation for name - name must be at least 2 characters
-- [ ] A dropdown for pizza size
-- [ ] A checklist for toppings - at least 4 (hint: name each separately!)
-- [ ] Text input for special instructions
-- [ ] An Add to Order button that submits form and returns a database record of name, size, toppings and special instructions
+- [x] A homepage that has a "/" route and links to your form (button, nav bar, or any other type of link is acceptable)
+- [x] A form with a "/pizza" route
+- [x] A name text input field
+- [x] Validation for name - name must be at least 2 characters
+- [x] A dropdown for pizza size
+- [x] A checklist for toppings - at least 4 (hint: name each separately!)
+- [x] Text input for special instructions
+- [x] An Add to Order button that submits form and returns a database record of name, size, toppings and special instructions
 
 #### Testing MVP
 

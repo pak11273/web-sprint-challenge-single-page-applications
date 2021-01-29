@@ -1,16 +1,24 @@
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import Pizza from "./components/Pizza";
 import React from "react";
-
-// import { Link } from "react-router-dom";
 
 const App = () => {
   return (
     <Router>
-      <Route path="/">
-        <Home />
-      </Route>
+      <div className="container">
+        <Navbar />
+        <Switch>
+          <Route path="/pizza">
+            <Pizza />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 };
