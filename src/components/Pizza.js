@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Swtich from "./Swtich";
 
 export default function Pizza() {
   const initialValues = {
     size: "",
-    toppings: [],
+    toppings: {
+      italian: false,
+      garlic: false,
+      "green pepper": false,
+      onions: false,
+      chicken: false,
+      bacon: false,
+      sausage: false,
+      pineapple: false,
+      pepperoni: false,
+      tomato: false,
+      spinach: false,
+    },
     substitute: false,
     instructions: "",
     qty: 0,
@@ -20,12 +32,39 @@ export default function Pizza() {
     // data must be at least 2 chars
   };
 
-  const onChange = (e) => {
+  useEffect(() => {}, [values]);
+
+  const onChange = (name, value, checked) => {
+    if (name === "toppings") {
+      setValues({
+        ...values,
+        toppings: {
+          ...values.toppings,
+          [value]: !values.toppings[value],
+        },
+      });
+    } else {
+      setValues({
+        ...values,
+        [name]: value,
+      });
+    }
+  };
+
+  const chgSize = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+    onChange(name, value);
+  };
+
+  const chgTopping = (e) => {
+    const { name, checked, value } = e.target;
+    console.table("name: ", name, "checked: ", checked, "value: ", value);
+    onChange(name, value, checked);
+  };
+
+  const chgInstructions = (e) => {
+    const { name, value } = e.target;
+    onChange(name, value);
   };
 
   return (
@@ -40,7 +79,7 @@ export default function Pizza() {
           <select
             name="size"
             className="sizes"
-            onChange={onChange}
+            onChange={chgSize}
             value={values.size}
           >
             <option value="" selected disabled hidden>
@@ -57,43 +96,103 @@ export default function Pizza() {
           <div className="toppings">
             <label>
               Spicy Italian Sausage
-              <input type="checkbox" name="italian" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="italian"
+                checked={values.toppings.italian === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Roasted Garlic
-              <input type="checkbox" name="garlic" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="garlic"
+                checked={values.toppings.garlic === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Green Pepper
-              <input type="checkbox" name="greenpepper" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="green pepper"
+                checked={values.toppings["green pepper"] === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Onions
-              <input type="checkbox" name="onions" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="onions"
+                checked={values.toppings.onions === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Grilled Chicken
-              <input type="checkbox" name="chicken" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="chicken"
+                checked={values.toppings.chicken === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Canadian Bacon
-              <input type="checkbox" name="canadian" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="canadian"
+                checked={values.toppings.canadian === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Sausage
-              <input type="checkbox" name="sausage" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="sausage"
+                checked={values.toppings.sausage === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Pineapple
-              <input type="checkbox" name="pineapple" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="pineapple"
+                checked={values.toppings.pineapple === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Pepperoni
-              <input type="checkbox" name="pepperoni" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="pepperoni"
+                checked={values.toppings.pepperoni === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Tomato
-              <input type="checkbox" name="tomato" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="tomato"
+                checked={values.toppings.tomato === true}
+                onChange={chgTopping}
+              />
             </label>
             <label>
               Spinach
@@ -116,8 +215,8 @@ export default function Pizza() {
               rows="10"
               type="text"
               name="instructions"
-              value=""
-              onChange={onChange}
+              value={values.instructions}
+              onChange={chgInstructions}
             />
           </label>
         </section>
