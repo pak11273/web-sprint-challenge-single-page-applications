@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+
 import Swtich from "./Swtich";
 
 export default function Pizza() {
+  const initialState = {
+    size: "",
+    toppings: [],
+    substitute: false,
+    instructions: "",
+    qty: 0,
+    total: 0,
+  };
+  const [state, setState] = useState(initialState);
+
   const submit = () => {
     // if form valid the clear input
     // if form valid send data and return
@@ -9,8 +20,12 @@ export default function Pizza() {
     // data must be at least 2 chars
   };
 
-  const onChange = () => {
-    console.log("chnage");
+  const onChange = (e) => {
+    const [name, value] = e.target;
+    setState({
+      ...state,
+      size: value.innerHTML,
+    });
   };
 
   return (
@@ -22,7 +37,7 @@ export default function Pizza() {
         <section id="sizes">
           <h4>Choose your size</h4>
           <p className="required">(required)</p>
-          <select className="sizes">
+          <select className="sizes" onChange={onChange}>
             <option value="" selected disabled hidden>
               -- select --
             </option>
