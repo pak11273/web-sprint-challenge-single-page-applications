@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
 import Swtich from "./Swtich";
 
 export default function Pizza() {
@@ -21,7 +22,7 @@ export default function Pizza() {
     substitute: false,
     instructions: "",
     qty: 0,
-    total: 0,
+    total: 0.0,
   };
   const [values, setValues] = useState(initialValues);
 
@@ -86,9 +87,9 @@ export default function Pizza() {
             name="size"
             className="sizes"
             onChange={chgSize}
-            value={values.size}
+            defaultValue="-- select --"
           >
-            <option value="" selected disabled hidden>
+            <option value="" disabled hidden>
               -- select --
             </option>
             <option value="xlg">Extra Large</option>
@@ -241,10 +242,15 @@ export default function Pizza() {
               </label>
               <label className="total">
                 Total
-                <input type="text" name="amount" value="$19.95" />
+                <div>$ {values.total.toFixed(2)}</div>
               </label>
             </div>
-            <button type="submit">Place your order</button>
+            <Link to="/success">
+              <button type="submit">
+                <img src="https://valentinos.com/wp-content/uploads/2019/06/pepperoni.png" />
+                <p>Place you order</p>
+              </button>
+            </Link>
           </div>
         </section>
       </form>

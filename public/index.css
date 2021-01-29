@@ -198,15 +198,31 @@ section#order textarea {
 
 button[type=submit] {
   display: block;
-  background: #ffffff;
+  position: relative;
   border: 10px solid #fd6001;
-  color: #fd6001;
   margin: 50px auto;
   border-radius: 50%;
   width: 200px;
   height: 200px;
   font-family: "Luckiest Guy", cursive;
   font-size: 2rem;
+  cursor: pointer;
+}
+button[type=submit]:hover {
+  border: 10px solid #df9917;
+}
+button[type=submit] img {
+  width: 100%;
+  height: 100%;
+}
+button[type=submit] p {
+  position: absolute;
+  color: #ffffff;
+  top: 34%;
+}
+
+.total > div {
+  margin-left: 20px;
 }
 
 /* eof Order styles */

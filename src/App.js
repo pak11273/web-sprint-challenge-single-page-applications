@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Pizza from "./components/Pizza";
 import React from "react";
+import Success from "./components/Success";
 
 const App = () => {
   return (
@@ -13,6 +14,9 @@ const App = () => {
         <Switch>
           <Route path="/pizza">
             <Pizza />
+          </Route>
+          <Route path="/success">
+            <Success />
           </Route>
           <Route path="/">
             <Home />
