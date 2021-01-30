@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
-import Swtich from "./Swtich";
+import Switch from "./Switch";
+
+const Checked = () => <>🤪</>;
+const UnChecked = () => <>🙂</>;
 
 export default function Pizza() {
   const initialValues = {
@@ -21,7 +23,7 @@ export default function Pizza() {
     },
     substitute: false,
     instructions: "",
-    qty: 0,
+    qty: 1,
     total: 0.0,
   };
   const [values, setValues] = useState(initialValues);
@@ -71,7 +73,7 @@ export default function Pizza() {
 
   const chgQty = (e) => {
     const { name, value } = e.target;
-    onChange(name, value);
+    onChange(name, Number(value));
   };
 
   return (
@@ -156,8 +158,8 @@ export default function Pizza() {
               <input
                 type="checkbox"
                 name="toppings"
-                value="canadian"
-                checked={values.toppings.canadian === true}
+                value="bacon"
+                checked={values.toppings.bacon === true}
                 onChange={chgTopping}
               />
             </label>
@@ -203,7 +205,13 @@ export default function Pizza() {
             </label>
             <label>
               Spinach
-              <input type="checkbox" name="spinach" value />
+              <input
+                type="checkbox"
+                name="toppings"
+                value="spinach"
+                checked={values.toppings.spinach === true}
+                onChange={chgTopping}
+              />
             </label>
             <label />
             <label />
@@ -213,7 +221,9 @@ export default function Pizza() {
         </section>
         <section id="substitute">
           <h4>Choice of Substitute</h4>
-          <Swtich />
+          <div className="switchContainer">
+            <Switch /> <span>Gluten Free Crust</span>
+          </div>
         </section>
         <section id="order">
           <label>
@@ -245,12 +255,10 @@ export default function Pizza() {
                 <div>$ {values.total.toFixed(2)}</div>
               </label>
             </div>
-            <Link to="/success">
-              <button type="submit">
-                <img src="https://valentinos.com/wp-content/uploads/2019/06/pepperoni.png" />
-                <p>Place you order</p>
-              </button>
-            </Link>
+            <button type="submit">
+              <img src="https://valentinos.com/wp-content/uploads/2019/06/pepperoni.png" />
+              <p>Place you order</p>
+            </button>
           </div>
         </section>
       </form>
