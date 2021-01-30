@@ -1,7 +1,11 @@
+import * as yup from "yup";
+
 import React, { useEffect, useState } from "react";
 
 import Switch from "./Switch";
 import axios from "axios";
+import classNames from "classnames";
+import schema from "../yup";
 
 const Checked = () => <>🤪</>;
 const UnChecked = () => <>🙂</>;
@@ -25,11 +29,20 @@ export default function Pizza() {
     substitute: false,
     instructions: "",
     qty: 1,
+    errors: [],
     sizeCost: 0,
     total: 0.0,
   };
 
+  const initialFormErrors = {
+    size: "",
+    substitute: "",
+    instructions: "",
+  };
+
   const [values, setValues] = useState(initialValues);
+  const [valid, setsValid] = useState(false);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
 
   useEffect(() => {
     axios
@@ -53,44 +66,32 @@ export default function Pizza() {
     // data must be at least 2 chars
   };
 
-  // const calcTotal = () => {
-  //   var total = 1;
-  //   for (const prop in values.toppings) {
-  //     if (values.toppings[prop]) {
-  //       total++;
-  //     } else {
-  //       total--;
-  //     }
-  //     console.log("total: ", total);
-  //     return total;
-  //   }
-  // };
-
   const onChange = (name, value, checked) => {
+    // yup
+    //   .reach(schema, name)
+    //   .validate(value)
+    //   .then(() => {
+    //     setFormErrors({ ...formErrors, [name]: "" });
+    //   })
+    //   .catch((err) => {
+    //     setFormErrors({
+    //       ...formErrors,
+    //       [name]: err.errors[0],
+    //     });
+    //   });
+
+    // // setFormValues({
+    // //   ...formValues,
+    // //   [name]: value, // NOT AN ARRAY
+    // // });
+
     if (!values.toppings[value] && name === "toppings") {
       setValues({ ...values, total: (values.total += 35) });
     } else if (values.toppings[value] && name === "toppings") {
       setValues({ ...values, total: (values.total -= 35) });
     }
 
-    // if (name === "size") {
-    //   if (value === "xlg") {
-    //     console.log(newSize);
-    //     setValues(newSize);
-    //   }
-    //   if (value === "lg") {
-    //     setValues(newSize);
-    //   }
-    //   if (value === "med") {
-    //     setValues(newSize);
-    //   }
-    //   if (value === "sm") {
-    //     setValues(newSize);
-    //   }
-    // }
-
     if (name === "toppings") {
-      console.log("toppings");
       setValues({
         ...values,
         toppings: {
@@ -100,19 +101,34 @@ export default function Pizza() {
       });
     } else if (name === "size") {
       if (value === "xlg") {
-        setValues({ ...values, sizeCost: 2999 });
+        setValues({
+          ...values,
+          [name]: value,
+          sizeCost: 2999,
+        });
       }
       if (value === "lg") {
-        setValues({ ...values, sizeCost: 2499 });
+        setValues({
+          ...values,
+          [name]: value,
+          sizeCost: 2499,
+        });
       }
       if (value === "med") {
-        setValues({ ...values, sizeCost: 1499 });
+        setValues({
+          ...values,
+          [name]: value,
+          sizeCost: 1499,
+        });
       }
       if (value === "sm") {
-        setValues({ ...values, sizeCost: 999 });
+        setValues({
+          ...values,
+          [name]: value,
+          sizeCost: 999,
+        });
       }
     } else {
-      console.log("else");
       setValues({
         ...values,
         [name]: value,
@@ -127,7 +143,6 @@ export default function Pizza() {
 
   const chgTopping = (e) => {
     const { name, checked, value } = e.target;
-    console.table("name: ", name, "checked: ", checked, "value: ", value);
     onChange(name, value, checked);
   };
 
@@ -148,15 +163,16 @@ export default function Pizza() {
       </h4>
       <form id="form" onSubmit={submit}>
         <section id="sizes">
+          <div>{formErrors.size}</div>
           <h4>Choose your size</h4>
           <p className="required">(required)</p>
           <select
             name="size"
             className="sizes"
             onChange={chgSize}
-            defaultValue="-- select --"
+            defaultValue="sel"
           >
-            <option value="" disabled hidden>
+            <option value="sel" disabled>
               -- select --
             </option>
             <option value="xlg">Extra Large</option>
@@ -320,7 +336,10 @@ export default function Pizza() {
                 <div>$ {values.total.toFixed(2)}</div>
               </label>
             </div>
-            <button type="submit">
+            <button
+              type="submit"
+              className={classNames({ notValidBtn: !valid, validBtn: valid })}
+            >
               <img src="https://valentinos.com/wp-content/uploads/2019/06/pepperoni.png" />
               <p>Place you order</p>
             </button>

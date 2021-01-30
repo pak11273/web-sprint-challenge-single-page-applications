@@ -208,17 +208,26 @@ section#order textarea {
   margin: 20px auto;
 }
 
+.notValidBtn {
+  border: 10px solid red;
+  cursor: not-allowed;
+}
+
+.validBtn {
+  display: block;
+  border: 10px solid #23d623;
+  cursor: pointer;
+}
+
 button[type=submit] {
   display: block;
   position: relative;
-  border: 10px solid #fd6001;
   margin: 50px auto;
   border-radius: 50%;
   width: 200px;
   height: 200px;
   font-family: "Luckiest Guy", cursive;
   font-size: 2rem;
-  cursor: pointer;
 }
 button[type=submit]:hover {
   border: 10px solid #df9917;

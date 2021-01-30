@@ -3,6 +3,8 @@ $font-text: "Roboto", sans-serif;
 
 /* colors */
 $white: #ffffff;
+$red: red;
+$green: rgb(35, 214, 35);
 $pizza: #fd6001;
 $lambda: #eb3a45;
 $hover: #df9917;
@@ -249,17 +251,33 @@ section#order {
   }
 }
 
+.notValidBtn {
+  // position: relative;
+  border: 10px solid $red;
+  // margin: 50px auto;
+  // border-radius: 50%;
+  // width: 200px;
+  // height: 200px;
+  // font-family: $font-heading;
+  // font-size: 2rem;
+  cursor: not-allowed;
+}
+
+.validBtn {
+  display: block;
+  border: 10px solid $green;
+  cursor: pointer;
+}
+
 button[type="submit"] {
   display: block;
   position: relative;
-  border: 10px solid $pizza;
   margin: 50px auto;
   border-radius: 50%;
   width: 200px;
   height: 200px;
   font-family: $font-heading;
   font-size: 2rem;
-  cursor: pointer;
 
   &:hover {
     border: 10px solid $hover;
