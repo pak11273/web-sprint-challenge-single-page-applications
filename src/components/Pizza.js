@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Switch from "./Switch";
+import axios from "axios";
 
 const Checked = () => <>🤪</>;
 const UnChecked = () => <>🙂</>;
@@ -24,9 +25,25 @@ export default function Pizza() {
     substitute: false,
     instructions: "",
     qty: 1,
+    sizeCost: 0,
     total: 0.0,
   };
+
   const [values, setValues] = useState(initialValues);
+
+  useEffect(() => {
+    axios
+      .post("https://reqres.in/api/users", {
+        test: "morpheus",
+        toppings: "leader",
+      })
+      .then((res) => {
+        console.log("res: ", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const submit = (e) => {
     e.preventDefault();
@@ -36,10 +53,44 @@ export default function Pizza() {
     // data must be at least 2 chars
   };
 
-  useEffect(() => {}, [values]);
+  // const calcTotal = () => {
+  //   var total = 1;
+  //   for (const prop in values.toppings) {
+  //     if (values.toppings[prop]) {
+  //       total++;
+  //     } else {
+  //       total--;
+  //     }
+  //     console.log("total: ", total);
+  //     return total;
+  //   }
+  // };
 
   const onChange = (name, value, checked) => {
+    if (!values.toppings[value] && name === "toppings") {
+      setValues({ ...values, total: (values.total += 35) });
+    } else if (values.toppings[value] && name === "toppings") {
+      setValues({ ...values, total: (values.total -= 35) });
+    }
+
+    // if (name === "size") {
+    //   if (value === "xlg") {
+    //     console.log(newSize);
+    //     setValues(newSize);
+    //   }
+    //   if (value === "lg") {
+    //     setValues(newSize);
+    //   }
+    //   if (value === "med") {
+    //     setValues(newSize);
+    //   }
+    //   if (value === "sm") {
+    //     setValues(newSize);
+    //   }
+    // }
+
     if (name === "toppings") {
+      console.log("toppings");
       setValues({
         ...values,
         toppings: {
@@ -47,7 +98,21 @@ export default function Pizza() {
           [value]: !values.toppings[value],
         },
       });
+    } else if (name === "size") {
+      if (value === "xlg") {
+        setValues({ ...values, sizeCost: 2999 });
+      }
+      if (value === "lg") {
+        setValues({ ...values, sizeCost: 2499 });
+      }
+      if (value === "med") {
+        setValues({ ...values, sizeCost: 1499 });
+      }
+      if (value === "sm") {
+        setValues({ ...values, sizeCost: 999 });
+      }
     } else {
+      console.log("else");
       setValues({
         ...values,
         [name]: value,
