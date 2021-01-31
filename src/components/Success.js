@@ -6,6 +6,7 @@ export default () => {
   let toppings = {};
   let total = 0;
   let filteredToppings = "";
+  let instructions = "";
 
   const {
     state: { order },
@@ -28,13 +29,14 @@ export default () => {
         }
         break;
       case "toppings":
-        console.log("toppings: ", order[prop]);
         toppings = order[prop];
         for (let prop in toppings) {
           if (toppings[prop]) {
             filteredToppings += prop + ", ";
           }
         }
+      case "instructions":
+        instructions = order[prop];
       case "total":
         total = order[prop];
     }
@@ -51,6 +53,14 @@ export default () => {
           {filteredToppings &&
             filteredToppings.substring(0, filteredToppings.length - 2)}
         </h4>
+        <div>
+          {instructions ? (
+            <>
+              <h5>You want these specific instructions:</h5>
+              <h4>{instructions}</h4>
+            </>
+          ) : null}
+        </div>
         <h5>
           Your total was:{" "}
           <span className="success-span">${total.toFixed(2)}</span>
