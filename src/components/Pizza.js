@@ -2,14 +2,15 @@ import * as yup from "yup";
 
 import React, { useEffect, useState } from "react";
 
-import Switch from "./Switch";
 import axios from "axios";
 import classNames from "classnames";
 import schema from "../yup";
 import { useHistory } from "react-router-dom";
 
-const Checked = () => <>🤪</>;
-const UnChecked = () => <>🙂</>;
+// import Switch from "./Switch";
+
+// const Checked = () => <>🤪</>;
+// const UnChecked = () => <>🙂</>;
 
 export default function Pizza() {
   const initialValues = {
@@ -43,7 +44,7 @@ export default function Pizza() {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [valid, setsValid] = useState(false);
+  const [valid] = useState(false);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const history = useHistory();
 
@@ -72,18 +73,18 @@ export default function Pizza() {
   }, [values.sizeCost, values.toppingsCost, values.qty]);
 
   const onChange = (name, value, checked) => {
-    // yup
-    //   .reach(schema, name)
-    //   .validate(value)
-    //   .then(() => {
-    //     setFormErrors({ ...formErrors, [name]: "" });
-    //   })
-    //   .catch((err) => {
-    //     setFormErrors({
-    //       ...formErrors,
-    //       [name]: err.errors[0],
-    //     });
-    //   });
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({ ...formErrors, [name]: "" });
+      })
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        });
+      });
 
     // // setFormValues({
     // //   ...formValues,
@@ -346,7 +347,10 @@ export default function Pizza() {
               type="submit"
               className={classNames({ notValidBtn: !valid, validBtn: valid })}
             >
-              <img src="https://valentinos.com/wp-content/uploads/2019/06/pepperoni.png" />
+              <img
+                alt="pizza slice"
+                src="https://valentinos.com/wp-content/uploads/2019/06/pepperoni.png"
+              />
               <p>Place you order</p>
             </button>
           </div>

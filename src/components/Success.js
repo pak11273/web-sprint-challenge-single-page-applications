@@ -36,12 +36,18 @@ export default () => {
             filteredToppings += prop + ", ";
           }
         }
+        break;
       case "instructions":
         instructions = order[prop];
+        break;
       case "qty":
         qty = order[prop];
+        break;
       case "total":
         total = order[prop];
+        break;
+      default:
+        break;
     }
   }
   return (
