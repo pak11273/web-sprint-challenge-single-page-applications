@@ -31,9 +31,9 @@ export default function Pizza() {
     instructions: "",
     qty: 1,
     errors: [],
+    toppingsCost: 0,
     sizeCost: 0,
-    costTracking: new Set(),
-    total: 0.0,
+    total: 0,
   };
 
   const initialFormErrors = {
@@ -66,6 +66,13 @@ export default function Pizza() {
     // data must be at least 2 chars
   };
 
+  useEffect(() => {
+    setValues({
+      ...values,
+      total: (values.toppingsCost + values.sizeCost / 100) * values.qty,
+    });
+  }, [values.sizeCost, values.toppingsCost, values.qty]);
+
   const onChange = (name, value, checked) => {
     // yup
     //   .reach(schema, name)
@@ -86,9 +93,9 @@ export default function Pizza() {
     // // });
 
     if (!values.toppings[value] && name === "toppings") {
-      setValues({ ...values, total: (values.total += 35 / 100) });
+      setValues({ ...values, toppingsCost: (values.toppingsCost += 35 / 100) });
     } else if (values.toppings[value] && name === "toppings") {
-      setValues({ ...values, total: (values.total -= 35 / 100) });
+      setValues({ ...values, toppingsCost: (values.toppingsCost -= 35 / 100) });
     }
 
     if (name === "toppings") {
@@ -100,16 +107,11 @@ export default function Pizza() {
         },
       });
     } else if (name === "size") {
-      const track = values.costTracking;
       if (value === "xlg") {
         setValues({
           ...values,
           [name]: value,
           sizeCost: 2999,
-          costTracking: track.add(value),
-          total: track.has(value)
-            ? values.total + 0
-            : values.total + values.sizeCost,
         });
       }
       if (value === "lg") {
