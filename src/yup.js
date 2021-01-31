@@ -1,11 +1,8 @@
 import * as yup from "yup";
 
 let schema = yup.object().shape({
-  size: yup.string().required(),
-  substitute: yup.boolean(),
+  size: yup.string().required("A size is required"),
   instructions: yup.string(),
-  toppings: yup.object(),
-  qty: yup.number(),
 });
 
 export default schema;

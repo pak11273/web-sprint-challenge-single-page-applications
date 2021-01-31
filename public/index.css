@@ -352,5 +352,12 @@ button[type=submit] p {
 }
 
 /* eof Success page styles */
+/* misc styles */
+.errors {
+  color: red;
+  font-weight: 800;
+}
+
+/* eof misc styles */
 
 /*# sourceMappingURL=index.css.map */

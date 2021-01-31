@@ -44,7 +44,7 @@ export default function Pizza() {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [valid] = useState(false);
+  const [valid] = useState(true);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const history = useHistory();
 
@@ -73,18 +73,22 @@ export default function Pizza() {
   }, [values.sizeCost, values.toppingsCost, values.qty]);
 
   const onChange = (name, value, checked) => {
-    yup
-      .reach(schema, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({ ...formErrors, [name]: "" });
-      })
-      .catch((err) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0],
+    if (name !== "toppings" && name !== "qty") {
+      yup
+        .reach(schema, name)
+        .validate(value)
+        .then(() => {
+          setFormErrors({ ...formErrors, [name]: "" });
+        })
+        .catch((err) => {
+          console.log(name);
+          console.log(err);
+          setFormErrors({
+            ...formErrors,
+            [name]: err.errors[0],
+          });
         });
-      });
+    }
 
     // // setFormValues({
     // //   ...formValues,
@@ -322,6 +326,9 @@ export default function Pizza() {
               value={values.instructions}
               onChange={chgInstructions}
             />
+            {formErrors.instructions && (
+              <div className="errors">{formErrors.instructions}</div>
+            )}
           </label>
         </section>
         <section id="order">
