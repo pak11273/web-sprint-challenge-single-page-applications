@@ -57,7 +57,6 @@ export default function Pizza() {
     axios
       .post("https://reqres.in/api/users", values)
       .then((res) => {
-        console.log("res: ", res.data);
         history.push({ pathname: "/success", state: { order: res.data } });
       })
       .catch((err) => {
@@ -87,9 +86,9 @@ export default function Pizza() {
     // // });
 
     if (!values.toppings[value] && name === "toppings") {
-      setValues({ ...values, total: (values.total += 35) });
+      setValues({ ...values, total: (values.total += 35 / 100) });
     } else if (values.toppings[value] && name === "toppings") {
-      setValues({ ...values, total: (values.total -= 35) });
+      setValues({ ...values, total: (values.total -= 35 / 100) });
     }
 
     if (name === "toppings") {
@@ -334,6 +333,7 @@ export default function Pizza() {
                   name="qty"
                   step="1"
                   defaultValue="1"
+                  min="1"
                   onChange={chgQty}
                 />
               </label>
