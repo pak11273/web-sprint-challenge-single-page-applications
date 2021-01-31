@@ -6,6 +6,7 @@ import Switch from "./Switch";
 import axios from "axios";
 import classNames from "classnames";
 import schema from "../yup";
+import { useHistory } from "react-router-dom";
 
 const Checked = () => <>🤪</>;
 const UnChecked = () => <>🙂</>;
@@ -31,6 +32,7 @@ export default function Pizza() {
     qty: 1,
     errors: [],
     sizeCost: 0,
+    costTracking: new Set(),
     total: 0.0,
   };
 
@@ -41,27 +43,26 @@ export default function Pizza() {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [valid, setsValid] = useState(false);
+  const [valid, setsValid] = useState(true);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-
-  useEffect(() => {
-    axios
-      .post("https://reqres.in/api/users", {
-        test: "morpheus",
-        toppings: "leader",
-      })
-      .then((res) => {
-        console.log("res: ", res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const history = useHistory();
 
   const submit = (e) => {
     e.preventDefault();
     // if form valid the clear input
+    if (valid) {
+      console.log("valid!");
+    }
     // if form valid send data and return
+    axios
+      .post("https://reqres.in/api/users", values)
+      .then((res) => {
+        console.log("res: ", res.data);
+        history.push({ pathname: "/success", state: { order: res.data } });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // if form invalid then show errors
     // data must be at least 2 chars
   };
@@ -100,11 +101,16 @@ export default function Pizza() {
         },
       });
     } else if (name === "size") {
+      const track = values.costTracking;
       if (value === "xlg") {
         setValues({
           ...values,
           [name]: value,
           sizeCost: 2999,
+          costTracking: track.add(value),
+          total: track.has(value)
+            ? values.total + 0
+            : values.total + values.sizeCost,
         });
       }
       if (value === "lg") {
@@ -333,7 +339,7 @@ export default function Pizza() {
               </label>
               <label className="total">
                 Total
-                <div>$ {values.total.toFixed(2)}</div>
+                <div>$ {values.total && values.total.toFixed(2)}</div>
               </label>
             </div>
             <button
