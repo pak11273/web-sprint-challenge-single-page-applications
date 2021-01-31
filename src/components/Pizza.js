@@ -43,27 +43,25 @@ export default function Pizza() {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [valid, setsValid] = useState(true);
+  const [valid, setsValid] = useState(false);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const history = useHistory();
 
   const submit = (e) => {
     e.preventDefault();
     // if form valid the clear input
-    if (valid) {
-      console.log("valid!");
+    if (!valid) {
+      console.log("not valid!");
+    } else {
+      axios
+        .post("https://reqres.in/api/users", values)
+        .then((res) => {
+          history.push({ pathname: "/success", state: { order: res.data } });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    // if form valid send data and return
-    axios
-      .post("https://reqres.in/api/users", values)
-      .then((res) => {
-        history.push({ pathname: "/success", state: { order: res.data } });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // if form invalid then show errors
-    // data must be at least 2 chars
   };
 
   useEffect(() => {
