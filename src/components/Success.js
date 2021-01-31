@@ -7,6 +7,7 @@ export default () => {
   let total = 0;
   let filteredToppings = "";
   let instructions = "";
+  let qty = "";
 
   const {
     state: { order },
@@ -37,6 +38,8 @@ export default () => {
         }
       case "instructions":
         instructions = order[prop];
+      case "qty":
+        qty = order[prop];
       case "total":
         total = order[prop];
     }
@@ -45,6 +48,9 @@ export default () => {
     <section id="success">
       <h4>Here is what you ordered</h4>
       <section className="confirm">
+        <h5>
+          Qty: <span className="success-span">{qty}</span> pizza(s)
+        </h5>
         <h5>
           Size: <span className="success-span">{size}</span>
         </h5>
