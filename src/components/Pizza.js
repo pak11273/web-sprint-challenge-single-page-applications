@@ -306,12 +306,12 @@ export default function Pizza() {
             <label />
           </div>
         </section>
-        <section id="substitute">
+        {/* <section id="substitute">
           <h4>Choice of Substitute</h4>
           <div className="switchContainer">
             <Switch /> <span>Gluten Free Crust</span>
           </div>
-        </section>
+        </section> */}
         <section id="order">
           <label>
             <h4>Special Instructions</h4>
